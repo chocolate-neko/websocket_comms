@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>WebSocket</h1>
+    <input type="text" id="message" />
+    <button id="send">Send</button>
+    <div id="output">
+
+    </div>
+    <div id="debug_out">
+
+    </div>
+    <script src="js/index.js"></script>
+    <!-- <script>
+
+        const ws = new WebSocket('ws://localhost:8888');
+        ws.binaryType = 'blob';
+
+        ws.addEventListener('open', () => {
+            console.log('Connected');
+        });
+
+        ws.addEventListener('message', (message) => {
+            if (message.data instanceof Blob) {
+                const reader = new FileReader();
+                reader.addEventListener('load', () => {
+                    document.getElementById('output').innerHTML += `<p>${reader.result}</p>`;
+                });
+                console.log(JSON.parse(message.data));
+                reader.readAsText(JSON.parse(message.data).message);
+            }
+            else {
+                console.log(JSON.parse(message.data));
+                document.getElementById('output').innerHTML += `<p>${JSON.parse(message.data).message}</p>`
+            }
+        });
+
+        ws.addEventListener('close', () => {
+            console.log('Disconnected');
+        });
+
+        ws.dispatchEvent = (event) => {
+            console.log(JSON.parse(event.data));
+            document.getElementById('debug_out').innerHTML += `<p>${event.data}</p>`
+        }
+
+        document.getElementById('send').addEventListener('click', () => {
+            const message = document.getElementById('message').value;
+            ws.send(message);
+        });
+    </script> -->
+</body>
+
+</html>
