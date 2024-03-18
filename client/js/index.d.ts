@@ -11,5 +11,7 @@ interface Message {
     timestamp: number;
     type: MessageType;
 }
+declare const message_template: (message: string, uuid: string, timestamp: number) => string;
+declare const textInput: HTMLInputElement;
 declare const sendBtn: HTMLButtonElement;
 //# sourceMappingURL=index.d.ts.map

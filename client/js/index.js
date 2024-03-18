@@ -7,6 +7,15 @@ var MessageType;
     MessageType[MessageType["USER_LEAVE"] = 1] = "USER_LEAVE";
     MessageType[MessageType["MESSAGE"] = 2] = "MESSAGE";
 })(MessageType || (MessageType = {}));
+const message_template = (message, uuid, timestamp) => {
+    return `
+<div class="message">
+    <span class="message-uuid">${uuid}</span>
+    <span class="message-timestamp">@${new Date(timestamp).toLocaleString()}</span>
+    <span class="message-message">${message}</span>
+</div>
+`;
+};
 ws.addEventListener('open', () => {
     console.log('Connected');
 });
@@ -32,24 +41,25 @@ ws.addEventListener('message', (message) => {
             console.log(JSON.parse(text));
             const output = document.getElementById('output');
             if (output) {
-                output.innerHTML += `<p>${JSON.parse(text).message}</p>`;
+                let message = JSON.parse(text);
+                output.innerHTML += message_template(message.message, message.uuid ? message.uuid : 'unknown', message.timestamp);
             }
         });
     }
 });
+const textInput = document.getElementById('message');
+if (textInput) {
+    textInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            sendBtn.click();
+        }
+    });
+}
 const sendBtn = document.getElementById('send');
 if (sendBtn) {
     sendBtn.addEventListener('click', () => {
-        const input = document.getElementById('message');
-        if (input) {
-            // send random data
-            ws.send(JSON.stringify({
-                message: input.value,
-                timestamp: Date.now(),
-                type: MessageType.MESSAGE,
-            }));
-            // ws.send(input.value);
-        }
+        ws.send(textInput.value);
+        textInput.value = '';
     });
 }
 //# sourceMappingURL=index.js.map

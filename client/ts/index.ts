@@ -14,6 +14,18 @@ interface Message {
     type: MessageType;
 }
 
+const message_template = (message: string, uuid: string, timestamp: number) => {
+    return `
+<div class="message">
+    <span class="message-uuid">${uuid}</span>
+    <span class="message-timestamp">@${new Date(
+        timestamp
+    ).toLocaleString()}</span>
+    <span class="message-message">${message}</span>
+</div>
+`;
+};
+
 ws.addEventListener('open', () => {
     console.log('Connected');
 });
@@ -42,30 +54,32 @@ ws.addEventListener('message', (message) => {
             const output = document.getElementById('output') as HTMLDivElement;
 
             if (output) {
-                output.innerHTML += `<p>${
-                    (JSON.parse(text) as Message).message
-                }</p>`;
+                let message = JSON.parse(text) as Message;
+                output.innerHTML += message_template(
+                    message.message,
+                    message.uuid ? message.uuid : 'unknown',
+                    message.timestamp
+                );
             }
         });
     }
 });
 
+const textInput = document.getElementById('message') as HTMLInputElement;
+
+if (textInput) {
+    textInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            sendBtn.click();
+        }
+    });
+}
+
 const sendBtn = document.getElementById('send') as HTMLButtonElement;
 
 if (sendBtn) {
     sendBtn.addEventListener('click', () => {
-        const input = document.getElementById('message') as HTMLInputElement;
-
-        if (input) {
-            // send random data
-            ws.send(
-                JSON.stringify({
-                    message: input.value,
-                    timestamp: Date.now(),
-                    type: MessageType.MESSAGE,
-                })
-            );
-            // ws.send(input.value);
-        }
+        ws.send(textInput.value);
+        textInput.value = '';
     });
 }

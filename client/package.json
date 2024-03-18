@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "http-server -c-1 -p 8081"
+    "start": "tsc && http-server -c-1 -p 8081"
   },
   "keywords": [],
   "author": "",

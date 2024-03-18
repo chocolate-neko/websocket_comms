@@ -1,0 +1,101 @@
+:root {
+    --primary-font: 'Roboto', sans-serif;
+    --secondary-font: monospace;
+}
+
+body {
+    font-family: var(--primary-font);
+    color: #000;
+    background-color: #fff;
+}
+
+#output {
+    display: block;
+    width: 100%;
+    height: calc(100vh - 200px);
+    overflow-y: scroll;
+    margin-bottom: 40px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.input-field input {
+    padding: 0.5em;
+    border: solid 1px black;
+    border-radius: 10px;
+    margin-right: 0.5em;
+    font-family: var(--secondary-font);
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 1.7em;
+    background-color: #fff;
+    color: #000;
+}
+
+.input-field button {
+    padding: 0.5em;
+    border: solid 1px black;
+    border-radius: 10px;
+    font-family: var(--secondary-font);
+    width: 10em;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 1.2em;
+    text-align: center;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-field button svg {
+    width: 30px;
+    height: 30px;
+    fill: #0dccf2;
+    margin-right: 0.5em;
+    vertical-align: middle;
+    pointer-events: none;
+    user-select: none;
+}
+
+.message {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0.8em;
+    border: solid 1px white;
+    padding: 0.5em;
+    border-radius: 10px;
+}
+
+.message-uuid {
+    font-family: var(--secondary-font);
+    font-weight: bold;
+}
+
+.message-timestamp {
+    font-family: var(--secondary-font);
+    padding-left: 10px;
+    color: gray;
+}
+
+.message-message {
+    padding-left: 10px;
+}
+
+.message-message::before {
+    content: '> ';
+
+    color: gray;
+
+    font-family: var(--secondary-font);
+    font-weight: bold;
+}
