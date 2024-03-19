@@ -45,12 +45,27 @@ wss.on('connection', (client) => {
         timestamp: Date.now(),
         type: MessageType.USER_JOIN,
     }, client);
+    broadcast({
+        message: `${client_uuid} joined the chat`,
+        uuid: 'SERVER-MESSAGE',
+        timestamp: Date.now(),
+        type: MessageType.USER_JOIN,
+    });
     client.on('message', (message) => {
         broadcast({
             message: `${message}`,
             uuid: client_uuid,
             timestamp: Date.now(),
             type: MessageType.MESSAGE,
+        });
+    });
+    client.on('close', () => {
+        console.log(`Client disconnected: ${client_uuid}`);
+        broadcast({
+            message: `${client_uuid} left the chat`,
+            uuid: 'SERVER-MESSAGE',
+            timestamp: Date.now(),
+            type: MessageType.USER_LEAVE,
         });
     });
 });
