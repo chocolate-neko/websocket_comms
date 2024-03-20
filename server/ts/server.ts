@@ -1,19 +1,10 @@
 import ws, { WebSocketServer } from 'ws';
-
-enum MessageType {
-    USER_JOIN,
-    USER_LEAVE,
-    MESSAGE,
-}
-
-interface Message {
-    message: string;
-    uuid?: string;
-    timestamp: number;
-    type: MessageType;
-}
+import { MessageType, Message } from './interfaces';
+import { DatabaseManager } from './database_manager';
 
 const LISTENING_PORT = 8888;
+
+const db = new DatabaseManager('mongodb://localhost:27017');
 
 const wss = new WebSocketServer({
     port: LISTENING_PORT,
@@ -77,6 +68,11 @@ function send_message(message: Message, ws_client: ws) {
 }
 
 function broadcast(message: Message) {
+    try {
+        db.connect().then(() => db.saveMessage(message));
+    } catch (e) {
+        console.log(e);
+    }
     wss.clients.forEach((client) => {
         if (client.readyState === ws.OPEN) send_message(message, client);
     });

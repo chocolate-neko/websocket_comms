@@ -10,36 +10,6 @@
       "title": "TODO",
       "cards": [
         {
-          "id": "162468cb-1827-4b6c-982c-8b86cc540051",
-          "listId": "b229ed3c-ac46-4c0d-95ec-294ecfd9f416",
-          "title": "Changeable Usernames",
-          "description": "Allow users to change their usernames",
-          "labels": [
-            {
-              "id": "54331978-1d3b-4160-9060-7c996cc801ad",
-              "title": "Server",
-              "color": "#ff9f1a"
-            }
-          ],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
-          "id": "e009d521-46fa-41c7-a351-7227f7dbf2d0",
-          "listId": "b229ed3c-ac46-4c0d-95ec-294ecfd9f416",
-          "title": "User Profiles",
-          "description": "",
-          "labels": [
-            {
-              "id": "54331978-1d3b-4160-9060-7c996cc801ad",
-              "title": "Server",
-              "color": "#ff9f1a"
-            }
-          ],
-          "checkboxes": [],
-          "comments": []
-        },
-        {
           "id": "f097cce5-8392-43f8-b582-921039437144",
           "listId": "b229ed3c-ac46-4c0d-95ec-294ecfd9f416",
           "title": "User Database",
@@ -55,15 +25,68 @@
           "comments": []
         },
         {
-          "id": "f72d7d6f-2663-4a34-901d-f67e2f48dc91",
+          "id": "162468cb-1827-4b6c-982c-8b86cc540051",
           "listId": "b229ed3c-ac46-4c0d-95ec-294ecfd9f416",
-          "title": "Message Database",
+          "title": "Changeable Usernames",
+          "description": "Allow users to change their usernames",
+          "labels": [
+            {
+              "id": "54331978-1d3b-4160-9060-7c996cc801ad",
+              "title": "Server",
+              "color": "#ff9f1a"
+            }
+          ],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "c2f28805-a464-4b2b-92f7-f44912f4b704",
+          "listId": "b229ed3c-ac46-4c0d-95ec-294ecfd9f416",
+          "title": "Image Sending",
+          "description": "Allow for images to be sent in the chat",
+          "labels": [],
+          "checkboxes": [
+            {
+              "id": "37c1d131-01ff-430b-9b4e-6338c5a5d507",
+              "title": "Create \"Send File\" button",
+              "checked": false
+            },
+            {
+              "id": "1dde949c-eab8-46f9-a2ed-bf81ae9c1b3a",
+              "title": "File can be uploaded to browser",
+              "checked": false
+            }
+          ],
+          "comments": []
+        },
+        {
+          "id": "f9996bb1-b38c-46ba-ab85-852c087c0333",
+          "listId": "b229ed3c-ac46-4c0d-95ec-294ecfd9f416",
+          "title": "User Profile Pictures",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "cad4082e-ba2e-43c9-80e4-91dd2db3cf55",
+          "listId": "b229ed3c-ac46-4c0d-95ec-294ecfd9f416",
+          "title": "Message Encryption",
+          "description": "",
+          "labels": [],
+          "checkboxes": [],
+          "comments": []
+        },
+        {
+          "id": "e009d521-46fa-41c7-a351-7227f7dbf2d0",
+          "listId": "b229ed3c-ac46-4c0d-95ec-294ecfd9f416",
+          "title": "User Profiles",
           "description": "",
           "labels": [
             {
-              "id": "b3d021cb-f6cd-42b9-866f-e78ccae5b764",
-              "title": "Database",
-              "color": "#51e898"
+              "id": "54331978-1d3b-4160-9060-7c996cc801ad",
+              "title": "Server",
+              "color": "#ff9f1a"
             }
           ],
           "checkboxes": [],
@@ -89,7 +112,23 @@
     {
       "id": "e26e0df4-8ee7-4695-be1f-10278eb87b6c",
       "title": "In Progress",
-      "cards": []
+      "cards": [
+        {
+          "id": "f72d7d6f-2663-4a34-901d-f67e2f48dc91",
+          "listId": "e26e0df4-8ee7-4695-be1f-10278eb87b6c",
+          "title": "Message Database",
+          "description": "",
+          "labels": [
+            {
+              "id": "b3d021cb-f6cd-42b9-866f-e78ccae5b764",
+              "title": "Database",
+              "color": "#51e898"
+            }
+          ],
+          "checkboxes": [],
+          "comments": []
+        }
+      ]
     },
     {
       "id": "0af5921f-643a-4796-b437-54b1387cf876",

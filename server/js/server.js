@@ -24,13 +24,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const ws_1 = __importStar(require("ws"));
-var MessageType;
-(function (MessageType) {
-    MessageType[MessageType["USER_JOIN"] = 0] = "USER_JOIN";
-    MessageType[MessageType["USER_LEAVE"] = 1] = "USER_LEAVE";
-    MessageType[MessageType["MESSAGE"] = 2] = "MESSAGE";
-})(MessageType || (MessageType = {}));
+const interfaces_1 = require("./interfaces");
+const database_manager_1 = require("./database_manager");
 const LISTENING_PORT = 8888;
+const db = new database_manager_1.DatabaseManager('mongodb://localhost:27017');
 const wss = new ws_1.WebSocketServer({
     port: LISTENING_PORT,
     clientTracking: true,
@@ -43,20 +40,20 @@ wss.on('connection', (client) => {
         message: `Hello ${client_uuid}!`,
         uuid: 'SERVER-MESSAGE',
         timestamp: Date.now(),
-        type: MessageType.USER_JOIN,
+        type: interfaces_1.MessageType.USER_JOIN,
     }, client);
     broadcast({
         message: `${client_uuid} joined the chat`,
         uuid: 'SERVER-MESSAGE',
         timestamp: Date.now(),
-        type: MessageType.USER_JOIN,
+        type: interfaces_1.MessageType.USER_JOIN,
     });
     client.on('message', (message) => {
         broadcast({
             message: `${message}`,
             uuid: client_uuid,
             timestamp: Date.now(),
-            type: MessageType.MESSAGE,
+            type: interfaces_1.MessageType.MESSAGE,
         });
     });
     client.on('close', () => {
@@ -65,7 +62,7 @@ wss.on('connection', (client) => {
             message: `${client_uuid} left the chat`,
             uuid: 'SERVER-MESSAGE',
             timestamp: Date.now(),
-            type: MessageType.USER_LEAVE,
+            type: interfaces_1.MessageType.USER_LEAVE,
         });
     });
 });
@@ -79,6 +76,12 @@ function send_message(message, ws_client) {
     ws_client.send(JSON.stringify(message));
 }
 function broadcast(message) {
+    try {
+        db.connect().then(() => db.saveMessage(message));
+    }
+    catch (e) {
+        console.log(e);
+    }
     wss.clients.forEach((client) => {
         if (client.readyState === ws_1.default.OPEN)
             send_message(message, client);
